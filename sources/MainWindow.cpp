@@ -26,15 +26,14 @@ void MainWindow::openFileDialog(void){
     openFileDialog->setViewMode(QFileDialog::List);
     /* TASK - FileDialog only done for Linux, need to change the default directory suitable for Windows */
     openFileDialog->setDirectory("/home");
-
     QStringList selectedFiles;
     if(openFileDialog->exec())
         selectedFiles = openFileDialog->selectedFiles();
-    if(!selectedFiles.empty())
+    if(!selectedFiles.empty()){
         openFileName = &selectedFiles[0];
-
-    this->readFileIntoTabs();
-    newFile = false;
+        this->readFileIntoTabs();
+        newFile = false;
+      }
 }
 
 void MainWindow::initTab(void){
