@@ -3,8 +3,8 @@
 
 #include <QMainWindow>
 #include <QString>
-#include "ui_csvMwindow.h"
-#include "FileData.h"
+#include "headers/ui_csvMwindow.h"
+#include "headers/FileDataIp.h"
 
 class MainWindow : public QMainWindow, Ui::csvMWindow{
     Q_OBJECT
@@ -23,8 +23,9 @@ private slots:
 private:
     QString *openFileName;
     QSize mainWindowSize;
-    FileData *dataFromFile;
+    FileDataIp *dataFromFile;
     bool newFile;
+    void writeToFile();
 };
 
 

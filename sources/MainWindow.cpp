@@ -38,7 +38,7 @@ void MainWindow::openFileDialog(void){
 
 void MainWindow::initTab(void){
     tabWidget->setCurrentIndex(tabWidget->indexOf(textTab));
-    dataFromFile = new FileData();
+    dataFromFile = new FileDataIp();
 }
 
 void MainWindow::readFileIntoTabs(){
@@ -69,7 +69,7 @@ void MainWindow::initSheet(int index){
         tableWidget->setRowCount(dataFromFile->dataArray.size());
         std::string parseLength = dataFromFile->dataArray[0];
 
-        for(int i = 0; i < parseLength.length(); i++){
+        for(unsigned int i = 0; i < parseLength.length(); i++){
             if(parseLength[i] == delim){
                 cols++;
             }
@@ -106,6 +106,10 @@ void MainWindow::saveAsFile(){
 
 }
 void MainWindow::closeCurrent(){
+
+}
+
+void MainWindow::writeToFile(){
 
 }
 

@@ -15,12 +15,12 @@ TEMPLATE = app
 SOURCES +=\
     sources/Application.cpp \
     sources/csvMwindow.cpp \
-    sources/FileData.cpp \
+    sources/FileDataIp.cpp \
     sources/MainWindow.cpp
 
 HEADERS  += \
     headers/csvMwindow.h \
-    headers/FileData.h \
+    headers/FileDataIp.h \
     headers/MainWindow.h \
     headers/ui_csvMwindow.h
 
