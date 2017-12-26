@@ -4,15 +4,15 @@
 FileDataIp::FileDataIp(){
 }
 
-FileDataIp::FileDataIp(QString *fileName)
+FileDataIp::FileDataIp(QString fileName)
 {
-    input.open(fileName->toUtf8().constData());
+    input.open(fileName.toUtf8().constData());
     strFullData.assign((std::istreambuf_iterator<char>(input)), (std::istreambuf_iterator<char>()));
     input.close();
 }
-void FileDataIp::initialize(QString* fileName){
+void FileDataIp::initialize(QString fileName){
     strFullData = "";
-    std::ifstream toRead(fileName->toUtf8().constData());
+    std::ifstream toRead(fileName.toUtf8().constData());
 
     if(toRead){
         std::string line;

@@ -16,13 +16,15 @@ SOURCES +=\
     sources/Application.cpp \
     sources/csvMwindow.cpp \
     sources/FileDataIp.cpp \
-    sources/MainWindow.cpp
+    sources/MainWindow.cpp \
+    sources/FileDataOp.cpp
 
 HEADERS  += \
     headers/csvMwindow.h \
     headers/FileDataIp.h \
     headers/MainWindow.h \
-    headers/ui_csvMwindow.h
+    headers/ui_csvMwindow.h \
+    headers/FileDataOp.h
 
 FORMS    += \
     forms/csvMwindow.ui

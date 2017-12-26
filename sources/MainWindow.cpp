@@ -9,7 +9,8 @@ MainWindow::MainWindow(QMainWindow *parent):QMainWindow(parent){
     setupUi(this);
 
     initTab();
-    actionSave->setEnabled(false);
+    //Should be set as false by default, enable only when changes are made
+    actionSave->setEnabled(true);
 
     connect(actionOpen,SIGNAL(triggered()),this,SLOT(openFileDialog()));
     connect(actionSave,SIGNAL(triggered()),this,SLOT(saveFile()));
@@ -30,7 +31,7 @@ void MainWindow::openFileDialog(void){
     if(openFileDialog->exec())
         selectedFiles = openFileDialog->selectedFiles();
     if(!selectedFiles.empty()){
-        openFileName = &selectedFiles[0];
+        openFileName = selectedFiles[0];
         this->readFileIntoTabs();
         newFile = false;
       }
@@ -55,7 +56,8 @@ void MainWindow::saveFile(){
     if(newFile)
         saveAsFile();
     else{
-        plainTextEdit->toPlainText();
+        QString contents = plainTextEdit->toPlainText();
+        writeToFile(openFileName,&contents);
     }
 }
 
@@ -109,8 +111,9 @@ void MainWindow::closeCurrent(){
 
 }
 
-void MainWindow::writeToFile(){
-
+void MainWindow::writeToFile(QString fileName,QString *contents){
+    writeFileOp = new FileDataOp();
+    writeFileOp->writeFile(fileName,contents);
 }
 
 void MainWindow::chkBoxRO(bool checked)

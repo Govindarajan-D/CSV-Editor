@@ -5,6 +5,7 @@
 #include <QString>
 #include "headers/ui_csvMwindow.h"
 #include "headers/FileDataIp.h"
+#include "headers/FileDataOp.h"
 
 class MainWindow : public QMainWindow, Ui::csvMWindow{
     Q_OBJECT
@@ -21,11 +22,12 @@ private slots:
     void chkBoxRO(bool);
     void initSheet(int);
 private:
-    QString *openFileName;
+    QString openFileName;
     QSize mainWindowSize;
     FileDataIp *dataFromFile;
+    FileDataOp *writeFileOp;
     bool newFile;
-    void writeToFile();
+    void writeToFile(QString fileName,QString *contents);
 };
 
 
