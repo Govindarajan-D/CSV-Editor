@@ -1,9 +1,11 @@
+#include<iostream>
+#include<string>
 #include<QtGui>
 #include<QFileDialog>
 #include<QTableWidgetItem>
-#include<iostream>
-#include<string>
+#include<QMessageBox>
 #include"headers/MainWindow.h"
+
 
 MainWindow::MainWindow(QMainWindow *parent):QMainWindow(parent){
     setupUi(this);
@@ -18,6 +20,8 @@ MainWindow::MainWindow(QMainWindow *parent):QMainWindow(parent){
     connect(actionClose,SIGNAL(triggered()),this,SLOT(closeCurrent()));
     connect(chkBxRO,SIGNAL(toggled(bool)),this,SLOT(chkBoxRO(bool)));
     connect(tabWidget, SIGNAL(currentChanged(int)),this,SLOT(initSheet(int)));
+    connect(plainTextEdit,SIGNAL(textChanged()),this,SLOT(contentModified()));
+
 }
 void MainWindow::openFileDialog(void){
 
@@ -113,10 +117,24 @@ void MainWindow::closeCurrent(){
 
 void MainWindow::writeToFile(QString fileName,QString *contents){
     writeFileOp = new FileDataOp();
-    writeFileOp->writeFile(fileName,contents);
+    if(writeFileOp->writeFile(fileName,contents) == FILE_WRITE_SUCCESS){
+        fileSaved = true;
+    }
+    else{
+        fileSaved = false;
+        QMessageBox fileWriteError;
+        fileWriteError.setWindowTitle("Error");
+        fileWriteError.setText("Error writing to File");
+        fileWriteError.setStandardButtons(QMessageBox::Ok);
+        fileWriteError.exec();
+    }
 }
 
 void MainWindow::chkBoxRO(bool checked)
 {
     plainTextEdit->setReadOnly(checked);
+}
+
+void MainWindow::contentModified(){
+    fileSaved = false;
 }

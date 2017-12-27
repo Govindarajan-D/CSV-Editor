@@ -1,16 +1,16 @@
 #ifndef FILEDATAOP_H
 #define FILEDATAOP_H
 
-#include<QString>
 #include<fstream>
-#include <iostream>
+#include<iostream>
+#include<QString>
 
 class FileDataOp
 {
 private:
     std::ofstream output;
 public:
-    void writeFile(QString fileName, QString *contents);
+    int writeFile(QString fileName, QString *contents);
 };
 
 #endif // FILEDATAOP_H

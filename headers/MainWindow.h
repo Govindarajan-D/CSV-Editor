@@ -7,6 +7,8 @@
 #include "headers/FileDataIp.h"
 #include "headers/FileDataOp.h"
 
+#define FILE_WRITE_SUCCESS 1
+
 class MainWindow : public QMainWindow, Ui::csvMWindow{
     Q_OBJECT
 public:
@@ -21,9 +23,11 @@ private slots:
     void closeCurrent();
     void chkBoxRO(bool);
     void initSheet(int);
+    void contentModified();
 private:
     QString openFileName;
     QSize mainWindowSize;
+    bool fileSaved;
     FileDataIp *dataFromFile;
     FileDataOp *writeFileOp;
     bool newFile;

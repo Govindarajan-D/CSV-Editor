@@ -1,10 +1,10 @@
 #ifndef FILEDATAIP_H
 #define FILEDATAIP_H
 
-#include<QString>
 #include<fstream>
 #include<string>
 #include<vector>
+#include<QString>
 
 class FileDataIp
 {
