@@ -213,7 +213,6 @@ public:
         menuHelp->addAction(actionAbout);
 
         retranslateUi(csvMWindow);
-        QObject::connect(actionExit, SIGNAL(triggered()), csvMWindow, SLOT(close()));
 
         tabWidget->setCurrentIndex(1);
 
@@ -246,6 +245,7 @@ public:
         actionFind_and_Replace->setText(QApplication::translate("csvMWindow", "Find and Replace", 0, QApplication::UnicodeUTF8));
         actionFind_and_Replace->setShortcut(QApplication::translate("csvMWindow", "Ctrl+F", 0, QApplication::UnicodeUTF8));
         actionSave->setText(QApplication::translate("csvMWindow", "Save", 0, QApplication::UnicodeUTF8));
+        actionSave->setEnabled(false);
         actionSave->setShortcut(QApplication::translate("csvMWindow", "Ctrl+S", 0, QApplication::UnicodeUTF8));
         actionSave_As->setText(QApplication::translate("csvMWindow", "Save As", 0, QApplication::UnicodeUTF8));
         chkBxRO->setText(QApplication::translate("csvMWindow", "Read Only", 0, QApplication::UnicodeUTF8));

@@ -24,6 +24,7 @@ private slots:
     void chkBoxRO(bool);
     void initSheet(int);
     void contentModified();
+    void exitProgram();
 private:
     QString openFileName;
     QSize mainWindowSize;

@@ -11,8 +11,7 @@ MainWindow::MainWindow(QMainWindow *parent):QMainWindow(parent){
     setupUi(this);
 
     initTab();
-    //Should be set as false by default, enable only when changes are made
-    actionSave->setEnabled(true);
+    fileSaved = true;
 
     connect(actionOpen,SIGNAL(triggered()),this,SLOT(openFileDialog()));
     connect(actionSave,SIGNAL(triggered()),this,SLOT(saveFile()));
@@ -21,6 +20,7 @@ MainWindow::MainWindow(QMainWindow *parent):QMainWindow(parent){
     connect(chkBxRO,SIGNAL(toggled(bool)),this,SLOT(chkBoxRO(bool)));
     connect(tabWidget, SIGNAL(currentChanged(int)),this,SLOT(initSheet(int)));
     connect(plainTextEdit,SIGNAL(textChanged()),this,SLOT(contentModified()));
+    connect(actionExit,SIGNAL(triggered()),this,SLOT(exitProgram()));
 
 }
 void MainWindow::openFileDialog(void){
@@ -54,6 +54,8 @@ void MainWindow::readFileIntoTabs(){
     if(tabWidget->currentIndex() == tabWidget->indexOf(sheetTab)){
         initSheet(tabWidget->indexOf(sheetTab));
     }
+    //Save disabled since plainTextEdit is modified when file is opened
+    actionSave->setEnabled(false);
 }
 
 void MainWindow::saveFile(){
@@ -119,6 +121,7 @@ void MainWindow::writeToFile(QString fileName,QString *contents){
     writeFileOp = new FileDataOp();
     if(writeFileOp->writeFile(fileName,contents) == FILE_WRITE_SUCCESS){
         fileSaved = true;
+        actionSave->setEnabled(false);
     }
     else{
         fileSaved = false;
@@ -137,4 +140,33 @@ void MainWindow::chkBoxRO(bool checked)
 
 void MainWindow::contentModified(){
     fileSaved = false;
+    actionSave->setEnabled(true);
+}
+
+void MainWindow::exitProgram(){
+    if(fileSaved){
+        this->close();
+    }
+    else{
+        QMessageBox fileWriteError;
+        fileWriteError.setWindowTitle("File not saved");
+        fileWriteError.setText("Save file before close?");
+        fileWriteError.setStandardButtons(QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel);
+        fileWriteError.setDefaultButton(QMessageBox::Yes);
+        int option = fileWriteError.exec();
+
+        switch(option){
+            case QMessageBox::Yes:
+                saveFile();
+            break;
+
+            case QMessageBox::No:
+                this->close();
+            break;
+            case QMessageBox::Cancel:
+                return;
+            break;
+        }
+
+    }
 }

@@ -38,7 +38,7 @@
       </property>
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="textTab">
         <attribute name="title">
@@ -279,6 +279,9 @@
    </property>
   </action>
   <action name="actionSave">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources/CE_RSRC.qrc">
      <normaloff>:/cersrc/icons/Icons/Save.svg</normaloff>:/cersrc/icons/Icons/Save.svg</iconset>
@@ -304,22 +307,5 @@
  <resources>
   <include location="../resources/CE_RSRC.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>actionExit</sender>
-   <signal>triggered()</signal>
-   <receiver>csvMWindow</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>377</x>
-     <y>181</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
