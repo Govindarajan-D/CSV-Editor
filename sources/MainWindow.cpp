@@ -69,6 +69,7 @@ void MainWindow::saveFile(){
 
 void MainWindow::initSheet(int index){
     if(index == tabWidget->indexOf(sheetTab)){
+        if(openFileName != ""){
 //Edit here to read data from file and insert rows:
         std::string cellString = "";
         char delim = ',';
@@ -108,6 +109,7 @@ void MainWindow::initSheet(int index){
         toInsert = new QTableWidgetItem(QString::fromStdString(cellString));
          tableWidget->setItem(i,j,toInsert);
     }
+   }
 }
 
 void MainWindow::saveAsFile(){
@@ -136,9 +138,11 @@ void MainWindow::writeToFile(QString fileName,QString *contents){
 void MainWindow::chkBoxRO(bool checked)
 {
     plainTextEdit->setReadOnly(checked);
+    tableWidget->setEnabled(!checked);
 }
 
 void MainWindow::contentModified(){
+    //Should write a better modification identification program
     fileSaved = false;
     actionSave->setEnabled(true);
 }
