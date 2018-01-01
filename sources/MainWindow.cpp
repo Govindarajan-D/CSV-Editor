@@ -162,6 +162,7 @@ void MainWindow::exitProgram(){
         switch(option){
             case QMessageBox::Yes:
                 saveFile();
+                this->close();
             break;
 
             case QMessageBox::No:
